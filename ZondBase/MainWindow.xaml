@@ -1,0 +1,201 @@
+﻿<Window x:Class="ZondBase.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="426" Width="700" Closing="Window_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="64" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="128"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <!--Панель управления-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32" />
+                <RowDefinition Height="32" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="32"/>
+                <ColumnDefinition Width="32"/>
+                <ColumnDefinition Width="32"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Дорога:" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" Margin="0,0,4,0"/>
+            <TextBlock Text="Зонд:" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" Margin="0,0,4,0"/>
+            <ComboBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="4"
+                      ItemsSource="{Binding DataBaseManager.DataBase.Roads}" SelectedItem="{Binding CurrentRoad}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Наименование}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <ComboBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="4"
+                      ItemsSource="{Binding CurrentRoad.Probes}" SelectedItem="{Binding CurrentProbe}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding ИмяЗонда}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button Content="+"    Command="{Binding AddRoad}"    Grid.Column="2" Grid.Row="0" Margin="3" />
+            <Button Content="-"    Command="{Binding DeleteRoad}"   Grid.Column="3" Grid.Row="0" Margin="3" />
+            <Button Content="Ред." Command="{Binding EditRoad}"    Grid.Column="4" Grid.Row="0" Margin="3" />
+            <Button Content="+"    Command="{Binding AddProbe}"   Grid.Column="2" Grid.Row="1" Margin="3" />
+            <Button Content="-"    Command="{Binding DeleteProbe}"   Grid.Column="3" Grid.Row="1" Margin="3" />
+            <Button Content="Ред." Command="{Binding EditProbe}"   Grid.Column="4" Grid.Row="1" Margin="3" />
+        </Grid>
+        <Grid Grid.Row="1">
+            <!--Область данных-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="24"/>
+                <RowDefinition/>
+                <RowDefinition Height="32"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="280"/>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Датчики:" VerticalAlignment="Center" Margin="3" FontWeight="Bold"/>
+            <!--<TextBlock Grid.Column="1" Grid.Row="0" Text="История съема значений:" VerticalAlignment="Center" Margin="3" FontWeight="Bold"/>-->
+            <TextBlock Grid.Column="2" Grid.Row="0" Text="Пересечения Д1 (мм):" VerticalAlignment="Center" Margin="3" FontWeight="Bold"/>
+            <TextBlock Grid.Column="3" Grid.Row="0" Text="Пересечения Д2 (мм):" VerticalAlignment="Center" Margin="3" FontWeight="Bold"/>
+            <ListView Grid.Column="0" Grid.Row="1" ItemsSource="{Binding CurrentProbe.Sensors}" SelectedItem="{Binding CurrentSensor}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock><Run Text="{Binding SensorIndex}"/>: <Run Text="{Binding SensorId}"/> - <Run Text="{Binding Name}"/> / Фактическая глубина: <Run Text="{Binding ActualPosition}"/></TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+            <TabControl Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
+                <TabItem Header="История съема значений">
+                    <DataGrid Grid.Column="1" Grid.Row="1" ItemsSource="{Binding History}" SelectedItem="{Binding CurrentHistory}" AutoGenerateColumns="False" HorizontalGridLinesBrush="LightBlue" VerticalGridLinesBrush="LightBlue" HeadersVisibility="Column" Background="{x:Null}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn IsReadOnly="True" Header="Дата" Binding="{Binding TimeStamp, StringFormat='dd.MM.yyyy'}"/>
+                            <!--StringFormat='dd.MM.yyyy HH:mm:ss'-->
+                            <DataGridTextColumn IsReadOnly="True" Header="Датчик1" Binding="{Binding Sensor1Value}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Датчик2" Binding="{Binding Sensor2Value}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Температура" Binding="{Binding Temperature}"/>
+                            <DataGridTextColumn Header="Положение ОД" Binding="{Binding Position}" FontWeight="Bold" />
+                            <DataGridTextColumn IsReadOnly="True" Header="Относительные перемещения" Binding="{Binding Deformation}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Суммарное перемещение" Binding="{Binding FullDeformation}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Абсолютное положение" Binding="{Binding ActualDeformation}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+                <TabItem Header="Деформации">
+                    <ListView ItemsSource="{Binding Graph.GraphItems}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Height="40" HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="200"/>
+                                        <ColumnDefinition Width="500"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding Name}" Grid.Column="0" VerticalAlignment="Center"/>
+                                    <ProgressBar Value="{Binding Value, Mode=OneWay}" Minimum="-3" Maximum="0" 
+                                                 Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Left"
+                                                 Foreground="White" Background="DeepSkyBlue"
+                                                 Width="250"/>
+                                    <ProgressBar Value="{Binding Value, Mode=OneWay}" Minimum="0" Maximum="3" 
+                                                 Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Right" 
+                                                 Background="White" Foreground="DeepSkyBlue"
+                                                 Width="250"/>
+                                    <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1"/>
+                                    <TextBlock Text="{Binding Value}" FontWeight="Bold" 
+                                               Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </TabItem>
+            </TabControl>
+            <Border Grid.Column="2" Grid.Row="1" Margin="2">
+                <ScrollViewer>
+                    <ItemsControl ItemsSource="{Binding Meassures.S1Points}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" Foreground="Blue"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Border>
+            <Border Grid.Column="3" Grid.Row="1" Margin="2">
+                <ScrollViewer>
+                    <ItemsControl ItemsSource="{Binding Meassures.S2Points}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" Foreground="Orange"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Border>
+
+            <Border Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Visibility="{Binding Meassures.MeassureVisibility}">
+                <Grid>
+                    <Rectangle VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Fill="White"/>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Информация отсутствует</TextBlock>
+                </Grid>
+            </Border>
+
+            <Grid Grid.Row="2" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="32"/>
+                    <ColumnDefinition Width="32"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Content="+" Command="{Binding AddSensor}" Margin="2,3,4,3" Width="26" />
+                <Button Content="-" Command="{Binding DeleteSensor}" Grid.Column="1" Grid.Row="0" Margin="3" Width="26" />
+                <Button Content="Редактировать" Command="{Binding EditSensor}" Grid.Column="2" Grid.Row="0" Margin="3" />
+            </Grid>
+            <Grid Grid.Row="2" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Command="{Binding RequestSensor}" Grid.Column="0" Content="Опросить датчик" Margin="3"/>
+                <Button Command="{Binding DeleteHistoryItem}" Grid.Column="1" Content="Удалить запись" Margin="3"/>
+                <Button Command="{Binding AddHistoryItem}" Grid.Column="2" Content="Добавить вручную" Margin="3"/>
+                <Button Command="{Binding EdHistoryItem}" Grid.Column="3" Content="Изменить" Margin="3"/>
+            </Grid>
+            <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Margin="2" VerticalAlignment="Center">Порт:</TextBlock>
+                <ComboBox Margin="2" ItemsSource="{Binding ComService.Ports}" SelectedValue="{Binding ComService.SelectedPort}" Width="80"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2">
+            <!--Панель настройки и отладки-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="18"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.RowSpan="2">
+                <Button Command="{Binding DataBaseManager.Open}" Margin="2">Открыть...</Button>
+                <Button Command="{Binding DataBaseManager.Save}" Margin="2">Сохранить...</Button>
+                <Button Command="{Binding DataBaseManager.SaveAs}" Margin="2">Сохранить как...</Button>
+                <Button Command="{Binding OpenTare}" Margin="2">Открыть тарировку</Button>
+            </StackPanel>
+
+            <TextBlock Grid.Column="1" FontWeight="Bold" Margin="2,0,2,0">Лог обмена данными:</TextBlock>
+            <ListView Grid.Column="1" Grid.Row ="1" ItemsSource="{Binding ComService.Log}" Margin="2">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,33 @@
+c:\users\snitkody\documents\visual studio 2010\Projects\ZondBase\ZondBase\bin\Debug\ZondBase.exe
+c:\users\snitkody\documents\visual studio 2010\Projects\ZondBase\ZondBase\bin\Debug\ZondBase.pdb
+c:\users\snitkody\documents\visual studio 2010\Projects\ZondBase\ZondBase\obj\x86\Debug\MainWindow.baml
+c:\users\snitkody\documents\visual studio 2010\Projects\ZondBase\ZondBase\obj\x86\Debug\MainWindow.g.cs
+c:\users\snitkody\documents\visual studio 2010\Projects\ZondBase\ZondBase\obj\x86\Debug\App.g.cs
+c:\users\snitkody\documents\visual studio 2010\Projects\ZondBase\ZondBase\obj\x86\Debug\ZondBase_MarkupCompile.cache
+c:\users\snitkody\documents\visual studio 2010\Projects\ZondBase\ZondBase\obj\x86\Debug\ZondBase.g.resources
+c:\users\snitkody\documents\visual studio 2010\Projects\ZondBase\ZondBase\obj\x86\Debug\ZondBase.Properties.Resources.resources
+c:\users\snitkody\documents\visual studio 2010\Projects\ZondBase\ZondBase\obj\x86\Debug\ZondBase.csproj.GenerateResource.Cache
+c:\users\snitkody\documents\visual studio 2010\Projects\ZondBase\ZondBase\obj\x86\Debug\ZondBase.exe
+c:\users\snitkody\documents\visual studio 2010\Projects\ZondBase\ZondBase\obj\x86\Debug\ZondBase.pdb
+C:\Users\SnitkoDY\documents\visual studio 2010\Projects\ZondBase\ZondBase\obj\x86\Debug\EditNode.baml
+C:\Users\SnitkoDY\documents\visual studio 2010\Projects\ZondBase\ZondBase\obj\x86\Debug\EditSensor.baml
+C:\Users\SnitkoDY\documents\visual studio 2010\Projects\ZondBase\ZondBase\obj\x86\Debug\EditNode.g.cs
+C:\Users\SnitkoDY\documents\visual studio 2010\Projects\ZondBase\ZondBase\obj\x86\Debug\EditSensor.g.cs
+D:\Skydrive\Проекты\Асфальт\ZondBase\ZondBase\obj\x86\Debug\ZondBase.exe
+D:\Skydrive\Проекты\Асфальт\ZondBase\ZondBase\obj\x86\Debug\ZondBase.pdb
+D:\Skydrive\Проекты\Асфальт\ZondBase\ZondBase\bin\Debug\ZondBase.exe
+D:\Skydrive\Проекты\Асфальт\ZondBase\ZondBase\bin\Debug\ZondBase.pdb
+D:\Skydrive\Проекты\Асфальт\ZondBase\ZondBase\obj\x86\Debug\EditNode.baml
+D:\Skydrive\Проекты\Асфальт\ZondBase\ZondBase\obj\x86\Debug\EditSensor.baml
+D:\Skydrive\Проекты\Асфальт\ZondBase\ZondBase\obj\x86\Debug\MainWindow.baml
+D:\Skydrive\Проекты\Асфальт\ZondBase\ZondBase\obj\x86\Debug\EditNode.g.cs
+D:\Skydrive\Проекты\Асфальт\ZondBase\ZondBase\obj\x86\Debug\EditSensor.g.cs
+D:\Skydrive\Проекты\Асфальт\ZondBase\ZondBase\obj\x86\Debug\MainWindow.g.cs
+D:\Skydrive\Проекты\Асфальт\ZondBase\ZondBase\obj\x86\Debug\App.g.cs
+D:\Skydrive\Проекты\Асфальт\ZondBase\ZondBase\obj\x86\Debug\ZondBase_MarkupCompile.cache
+D:\Skydrive\Проекты\Асфальт\ZondBase\ZondBase\obj\x86\Debug\ZondBase.g.resources
+D:\Skydrive\Проекты\Асфальт\ZondBase\ZondBase\obj\x86\Debug\ZondBase.Properties.Resources.resources
+D:\Skydrive\Проекты\Асфальт\ZondBase\ZondBase\obj\x86\Debug\ZondBase.csproj.GenerateResource.Cache
+D:\Skydrive\Проекты\Асфальт\ZondBase\ZondBase\bin\Debug\ZondBase.exe.config
+D:\Skydrive\Проекты\Асфальт\ZondBase\ZondBase\obj\x86\Debug\EditHistoryItem.baml
+D:\Skydrive\Проекты\Асфальт\ZondBase\ZondBase\obj\x86\Debug\EditHistoryItem.g.cs
